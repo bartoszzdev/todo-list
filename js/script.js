@@ -14,8 +14,6 @@ addBtn.addEventListener("click", function(e) {
     todoItem.classList.add("todo-item")
     todoDiv.appendChild(todoItem)
 
-    saveLocalTodos(inputTodo.value)
-
     const checkBtn = document.createElement("button")
     checkBtn.innerText = "\u2713"
     checkBtn.classList.add("check-btn")
@@ -26,10 +24,11 @@ addBtn.addEventListener("click", function(e) {
     deleteBtn.classList.add("delete-btn")
     todoDiv.appendChild(deleteBtn)
 
-    if (inputTodo.value === "") {
+    if (inputTodo.value.charAt(0) === "" || inputTodo.value.charAt(0) === " ") {
         alert("You must write something!")
     } else {
         todoList.appendChild(todoDiv)
+        saveLocalTodos(inputTodo.value)
     }
 
     inputTodo.value = ""
@@ -138,105 +137,3 @@ function removeLocalTodos(todo) {
     todos.splice(todos.indexOf(todoIndex), 1)
     localStorage.setItem("todos", JSON.stringify(todos))
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// if (todosFromLocalStorage) {
-//     myTodos = todosFromLocalStorage
-//     renderTodo(todosFromLocalStorage)
-// }
-
-/* addBtn.addEventListener("click", function(event) {
-    event.preventDefault()
-
-    if (inputTodo.value === "") {
-        alert("You must write something!")
-    } else { 
-        myTodos.push(inputTodo.value)
-        inputTodo.value = ""
-        localStorage.setItem("todo", JSON.stringify(myTodos))
-        renderTodo(myTodos)
-    }
-})
-
-function renderTodo(items) {
-    let item = ""
-    for (let i = 0; i < items.length; i++) {
-        item += `<li class="item">${items[i]}</li>`
-    }
-    todoItems.innerHTML = item
-
-    createCloseBtn()
-    createDoneBtn()
-    checkItem()
-    deleteItem()
-}
-
-function createCloseBtn() {
-    let myNodelist = document.querySelectorAll("#todo-items li");
-    for (let i = 0; i < myNodelist.length; i++) {
-        let btn = document.createElement("button")
-        let txt = document.createTextNode("\u00D7")
-        btn.className = "delete-btn"
-        btn.appendChild(txt)
-        myNodelist[i].appendChild(btn)
-    }
-} 
-
-function deleteItem() { 
-    let close = document.getElementsByClassName("delete-btn")
-    for (let i = 0; i < close.length; i++) {
-        close[i].addEventListener("click", function(event) {
-            let div = event.target.parentElement
-            div.parentElement.removeChild(div)
-            myTodos.splice(myTodos.indexOf(myTodos[i]), 1)
-            renderTodo(myTodos)
-        })
-    }
-}
-
-function createDoneBtn() {
-    let myNodelist = document.querySelectorAll("#todo-items li");
-    for (let i = 0; i < myNodelist.length; i++) {
-        let btn = document.createElement("button")
-        let txt = document.createTextNode("\u2713")
-        btn.className = "done-btn"
-        btn.appendChild(txt)
-        myNodelist[i].appendChild(btn)
-    }
-}
-
-function checkItem() {
-    let done = document.getElementsByClassName("done-btn")
-    for (let i = 0; i < done.length; i++) {
-        done[i].addEventListener("click", (event) => {
-            event.target.parentElement.classList.toggle("checked")
-        })
-    }
-} */
